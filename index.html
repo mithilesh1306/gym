@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlexZone Gym - Periyanaickenpalayam, Coimbatore</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Teko:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom Styles and Animations -->
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #050505;
+            color: #f1f1f1;
+        }
+        .font-teko {
+            font-family: 'Teko', sans-serif;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('bg-img/pexels-anush-1229356.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .brand-gradient {
+            background: linear-gradient(90deg, #ef4444, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .brand-bg {
+            background: linear-gradient(90deg, #ef4444, #f97316);
+        }
+        .btn-primary {
+            @apply inline-block px-8 py-3 font-semibold text-white uppercase transition-transform duration-300 transform rounded-md;
+            background: linear-gradient(90deg, #ef4444, #f97316);
+        }
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
+        }
+        .section-title {
+            @apply font-teko text-5xl md:text-7xl uppercase tracking-wider;
+        }
+        .nav-link {
+            @apply relative text-white font-semibold transition-colors duration-300 after:content-[''] after:absolute after:left-0 after:bottom-[-5px] after:h-[2px] after:w-0 after:bg-red-500 after:transition-all after:duration-300;
+        }
+        .nav-link:hover:after, .nav-link.active:after {
+            @apply w-full;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        /* Card flip animation */
+        .flip-card { perspective: 1000px; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s; transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; @apply rounded-lg p-6 flex flex-col items-center justify-center; }
+        .flip-card-front { @apply bg-zinc-800; }
+        .flip-card-back { @apply bg-zinc-900; transform: rotateY(180deg); }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-teko text-4xl font-bold text-white uppercase">Flex<span class="brand-gradient">Zone</span></a>
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#classes" class="nav-link">Classes</a>
+                <a href="#trainers" class="nav-link">Trainers</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <a href="#pricing" class="hidden lg:inline-block btn-primary">Join Now</a>
+            <button id="menu-btn" class="lg:hidden text-white text-3xl z-50">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="lg:hidden fixed top-0 right-0 h-full w-2/3 bg-black bg-opacity-90 backdrop-blur-sm transform translate-x-full mobile-menu">
+            <div class="flex flex-col items-center justify-center h-full space-y-8">
+                <a href="#home" class="text-white text-2xl font-semibold mobile-nav-link">Home</a>
+                <a href="#about" class="text-white text-2xl font-semibold mobile-nav-link">About</a>
+                <a href="#classes" class="text-white text-2xl font-semibold mobile-nav-link">Classes</a>
+                <a href="#trainers" class="text-white text-2xl font-semibold mobile-nav-link">Trainers</a>
+                <a href="#pricing" class="text-white text-2xl font-semibold mobile-nav-link">Pricing</a>
+                <a href="#contact" class="text-white text-2xl font-semibold mobile-nav-link">Contact</a>
+                 <a href="#pricing" class="btn-primary mt-4">Join Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center pt-20">
+        <div class="container mx-auto px-6 text-center">
+            <div style="animation: fadeInUp 1s ease-out;">
+                <h1 class="font-teko text-5xl md:text-8xl lg:text-9xl uppercase font-extrabold text-white leading-tight">
+                    Unleash Your <span class="brand-gradient">Inner Strength</span>
+                </h1>
+                <p class="mt-4 text-lg md:text-2xl text-zinc-300 max-w-3xl mx-auto">
+                    Welcome to FlexZone, Periyanaickenpalayam's premium fitness destination. State-of-the-art equipment, expert trainers, and a motivating community await you.
+                </p>
+                <div class="mt-10">
+                    <a href="#pricing" class="btn-primary text-xl">Start Your Journey</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="section-title">About <span class="brand-gradient">FlexZone</span></h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto mt-2">More than a gym, we are a community dedicated to your fitness goals.</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-scroll">
+                    <img src="https://placehold.co/600x400/18181b/FFFFFF?text=Our+Facility" alt="FlexZone Gym Interior" class="rounded-lg shadow-2xl w-full h-auto">
+                </div>
+                <div class="animate-on-scroll">
+                    <h3 class="font-teko text-4xl font-bold text-white mb-4">Our Mission: Your Transformation</h3>
+                    <p class="text-zinc-300 mb-4 leading-relaxed">
+                        At FlexZone, we believe fitness is a journey, not a destination. Our mission is to provide a supportive, energetic, and clean environment where you can challenge yourself and achieve the results you desire. We're equipped with top-tier machinery and a team that's passionate about helping you succeed.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 mt-8">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-dumbbell text-red-500 text-2xl"></i>
+                            <span class="font-semibold">Modern Equipment</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-users text-red-500 text-2xl"></i>
+                            <span class="font-semibold">Expert Trainers</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-heart-pulse text-red-500 text-2xl"></i>
+                            <span class="font-semibold">Personalized Plans</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-shield-halved text-red-500 text-2xl"></i>
+                            <span class="font-semibold">Clean & Safe</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-zinc-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll">
+                 <h2 class="section-title">Why Choose <span class="brand-gradient">Us?</span></h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto mt-2">Unlock your potential with features designed for success.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="flip-card animate-on-scroll h-64">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fas fa-clock text-5xl brand-gradient mb-4"></i>
+                            <h3 class="font-teko text-3xl font-bold">24/7 Access</h3>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="font-teko text-2xl font-bold mb-2">Train Anytime</h3>
+                            <p class="text-zinc-300 text-sm">Our doors are always open. Work out on your schedule, day or night.</p>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Feature 2 -->
+                <div class="flip-card animate-on-scroll h-64" style="transition-delay: 200ms;">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                             <i class="fas fa-person-chalkboard text-5xl brand-gradient mb-4"></i>
+                            <h3 class="font-teko text-3xl font-bold">Group Classes</h3>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="font-teko text-2xl font-bold mb-2">Motivating Sessions</h3>
+                            <p class="text-zinc-300 text-sm">From high-energy Zumba to calming Yoga, find a class that moves you.</p>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Feature 3 -->
+                <div class="flip-card animate-on-scroll h-64" style="transition-delay: 400ms;">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fas fa-spa text-5xl brand-gradient mb-4"></i>
+                            <h3 class="font-teko text-3xl font-bold">Luxury Amenities</h3>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="font-teko text-2xl font-bold mb-2">Relax & Recharge</h3>
+                            <p class="text-zinc-300 text-sm">Enjoy premium locker rooms, steam rooms, and a post-workout smoothie bar.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Feature 4 -->
+                <div class="flip-card animate-on-scroll h-64" style="transition-delay: 600ms;">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <i class="fas fa-mobile-screen-button text-5xl brand-gradient mb-4"></i>
+                            <h3 class="font-teko text-3xl font-bold">Fitness App</h3>
+                        </div>
+                        <div class="flip-card-back">
+                            <h3 class="font-teko text-2xl font-bold mb-2">Track Your Progress</h3>
+                            <p class="text-zinc-300 text-sm">Our exclusive app helps you log workouts, book classes, and see results.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Classes Section -->
+    <section id="classes" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="section-title">Our <span class="brand-gradient">Classes</span></h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto mt-2">Find your favorite way to sweat. All levels are welcome.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Class Card 1 -->
+                <div class="bg-zinc-900 rounded-lg overflow-hidden group animate-on-scroll">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x400/ef4444/FFFFFF?text=CrossFit" alt="CrossFit Class" class="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+                        <h3 class="absolute bottom-4 left-4 font-teko text-4xl text-white">CrossFit</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-zinc-400 mb-4">High-intensity functional movements to build strength and conditioning.</p>
+                        <p class="font-semibold text-white"><i class="far fa-clock mr-2 text-red-500"></i>Mon, Wed, Fri - 6 AM & 7 PM</p>
+                    </div>
+                </div>
+                <!-- Class Card 2 -->
+                 <div class="bg-zinc-900 rounded-lg overflow-hidden group animate-on-scroll" style="transition-delay: 200ms;">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x400/f97316/FFFFFF?text=Yoga" alt="Yoga Class" class="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+                        <h3 class="absolute bottom-4 left-4 font-teko text-4xl text-white">Yoga Flow</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-zinc-400 mb-4">Improve flexibility, balance, and mindfulness with our vinyasa yoga sessions.</p>
+                        <p class="font-semibold text-white"><i class="far fa-clock mr-2 text-red-500"></i>Tue, Thu - 7 AM & 6 PM</p>
+                    </div>
+                </div>
+                <!-- Class Card 3 -->
+                 <div class="bg-zinc-900 rounded-lg overflow-hidden group animate-on-scroll" style="transition-delay: 400ms;">
+                    <div class="relative">
+                        <img src="https://placehold.co/600x400/f59e0b/FFFFFF?text=Zumba" alt="Zumba Class" class="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+                        <h3 class="absolute bottom-4 left-4 font-teko text-4xl text-white">Zumba</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-zinc-400 mb-4">Dance your way to fitness with this fun, high-energy cardio workout.</p>
+                        <p class="font-semibold text-white"><i class="far fa-clock mr-2 text-red-500"></i>Sat - 10 AM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trainers Section -->
+    <section id="trainers" class="py-20 bg-zinc-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="section-title">Meet Our <span class="brand-gradient">Experts</span></h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto mt-2">Certified professionals dedicated to your success.</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Trainer 1 -->
+                <div class="text-center group animate-on-scroll">
+                    <div class="relative w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-zinc-700 group-hover:border-red-500 transition-all duration-300 transform group-hover:scale-105">
+                        <img src="https://placehold.co/200x200/cccccc/333333?text=Trainer+1" alt="Trainer 1" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-teko text-3xl mt-4">Ram</h3>
+                    <p class="text-red-500 font-semibold">Head Coach - Strength</p>
+                    <div class="flex justify-center space-x-4 mt-2 text-zinc-400">
+                        <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <!-- Trainer 2 -->
+                <div class="text-center group animate-on-scroll" style="transition-delay: 200ms;">
+                    <div class="relative w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-zinc-700 group-hover:border-red-500 transition-all duration-300 transform group-hover:scale-105">
+                        <img src="https://placehold.co/200x200/cccccc/333333?text=Trainer+2" alt="Trainer 2" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-teko text-3xl mt-4">Ravimohan</h3>
+                    <p class="text-red-500 font-semibold">Yoga & Pilates Guru</p>
+                    <div class="flex justify-center space-x-4 mt-2 text-zinc-400">
+                        <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <!-- Trainer 3 -->
+                <div class="text-center group animate-on-scroll" style="transition-delay: 400ms;">
+                    <div class="relative w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-zinc-700 group-hover:border-red-500 transition-all duration-300 transform group-hover:scale-105">
+                        <img src="https://placehold.co/200x200/cccccc/333333?text=Trainer+3" alt="Trainer 3" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-teko text-3xl mt-4">Vikram</h3>
+                    <p class="text-red-500 font-semibold">CrossFit Specialist</p>
+                    <div class="flex justify-center space-x-4 mt-2 text-zinc-400">
+                        <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <!-- Trainer 4 -->
+                <div class="text-center group animate-on-scroll" style="transition-delay: 600ms;">
+                    <div class="relative w-48 h-48 mx-auto rounded-full overflow-hidden border-4 border-zinc-700 group-hover:border-red-500 transition-all duration-300 transform group-hover:scale-105">
+                        <img src="https://placehold.co/200x200/cccccc/333333?text=Trainer+4" alt="Trainer 4" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="font-teko text-3xl mt-4">Suresh</h3>
+                    <p class="text-red-500 font-semibold">Nutritionist & HIIT</p>
+                    <div class="flex justify-center space-x-4 mt-2 text-zinc-400">
+                        <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="section-title">Membership <span class="brand-gradient">Plans</span></h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto mt-2">Choose the plan that fits your lifestyle. No hidden fees.</p>
+            </div>
+            <div class="grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Pricing Plan 1 -->
+                <div class="bg-zinc-900 p-8 rounded-lg text-center border-2 border-zinc-800 hover:border-red-500 transition-all duration-300 transform hover:-translate-y-2 animate-on-scroll">
+                    <h3 class="font-teko text-4xl font-bold">Basic Fit</h3>
+                    <p class="text-zinc-400 mt-2">Perfect for beginners</p>
+                    <div class="my-6">
+                        <span class="text-5xl font-bold">₹1000</span>
+                        <span class="text-zinc-400">/month</span>
+                    </div>
+                    <ul class="space-y-4 text-zinc-300">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Gym Access</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Cardio Zone</li>
+                        <li><i class="fas fa-times text-red-500 mr-2"></i>Group Classes</li>
+                        <li><i class="fas fa-times text-red-500 mr-2"></i>Personal Training</li>
+                    </ul>
+                    <a href="https://wa.me/918754328542?text=I'm%20interested%20in%20the%20Basic%20Fit%20plan." target="_blank" class="mt-8 btn-primary w-full block">Book Now</a>
+                </div>
+                <!-- Pricing Plan 2 (Recommended) -->
+                <div class="brand-bg p-1 rounded-lg text-center transform scale-105 shadow-2xl animate-on-scroll" style="transition-delay: 200ms;">
+                    <div class="bg-black p-8 rounded-lg h-full relative">
+                        <span class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-white text-black px-4 py-1 rounded-full text-sm font-bold uppercase">Popular</span>
+                        <h3 class="font-teko text-4xl font-bold text-white">Pro Flex</h3>
+                        <p class="text-zinc-400 mt-2">For the dedicated</p>
+                        <div class="my-6">
+                            <span class="text-5xl font-bold text-white">₹2000</span>
+                            <span class="text-zinc-400">/month</span>
+                        </div>
+                        <ul class="space-y-4 text-zinc-300">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Gym Access</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Cardio Zone</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>All Group Classes</li>
+                            <li><i class="fas fa-times text-red-500 mr-2"></i>Personal Training</li>
+                        </ul>
+                        <a href="https://wa.me/918754328542?text=I'm%20interested%20in%20the%20Pro%20Flex%20plan." target="_blank" class="mt-8 btn-primary w-full block">Book Now</a>
+                    </div>
+                </div>
+                <!-- Pricing Plan 3 -->
+                <div class="bg-zinc-900 p-8 rounded-lg text-center border-2 border-zinc-800 hover:border-red-500 transition-all duration-300 transform hover:-translate-y-2 animate-on-scroll" style="transition-delay: 400ms;">
+                    <h3 class="font-teko text-4xl font-bold">Ultimate</h3>
+                    <p class="text-zinc-400 mt-2">All-in experience</p>
+                    <div class="my-6">
+                        <span class="text-5xl font-bold">₹3000</span>
+                        <span class="text-zinc-400">/month</span>
+                    </div>
+                    <ul class="space-y-4 text-zinc-300">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Gym Access</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>Cardio Zone</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>All Group Classes</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i>4 PT Sessions</li>
+                    </ul>
+                    <a href="https://wa.me/918754328542?text=I'm%20interested%20in%20the%20Ultimate%20plan." target="_blank" class="mt-8 btn-primary w-full block">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Map Section -->
+    <section id="contact" class="py-20 bg-zinc-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="section-title">Get In <span class="brand-gradient">Touch</span></h2>
+                <p class="text-zinc-400 max-w-2xl mx-auto mt-2">We're located in the heart of Periyanaickenpalayam. Visit us or drop a message!</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="animate-on-scroll">
+                    <h3 class="font-teko text-4xl mb-6">Find Us Here</h3>
+                    <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+                       <!-- Google Maps Embed for Periyanaickenpalayam, Coimbatore -->
+                       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31317.387157644916!2d76.92429767355106!3d11.139049791443725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8f7e7c85b3e69%3A0x62961e013658a2d2!2sPeriyanaickenpalayam%2C%20Coimbatore%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <div class="mt-6 space-y-4 text-zinc-300">
+                        <p><i class="fas fa-map-marker-alt text-red-500 mr-3 w-4 text-center"></i> <strong>Location:</strong> Main Road, Periyanaickenpalayam, Coimbatore, Tamil Nadu 641020</p>
+                        <p><i class="fas fa-phone text-red-500 mr-3 w-4 text-center"></i> <strong>Phone:</strong> +91 87543 28542</p>
+                        <p><i class="fas fa-envelope text-red-500 mr-3 w-4 text-center"></i> <strong>Email:</strong> foxfreelancing21@gmail.com</p>
+                    </div>
+                </div>
+                <div class="animate-on-scroll" style="transition-delay: 200ms;">
+                    <h3 class="font-teko text-4xl mb-6">Send a Message</h3>
+                    <form action="#" method="POST">
+                        <div class="mb-4">
+                            <input type="text" placeholder="Your Name" class="w-full p-4 bg-zinc-800 border-2 border-zinc-700 rounded-lg focus:outline-none focus:border-red-500 transition-colors">
+                        </div>
+                        <div class="mb-4">
+                            <input type="email" placeholder="Your Email" class="w-full p-4 bg-zinc-800 border-2 border-zinc-700 rounded-lg focus:outline-none focus:border-red-500 transition-colors">
+                        </div>
+                        <div class="mb-4">
+                            <textarea placeholder="Your Message" rows="6" class="w-full p-4 bg-zinc-800 border-2 border-zinc-700 rounded-lg focus:outline-none focus:border-red-500 transition-colors"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12">
+        <div class="container mx-auto px-6 text-center text-zinc-400">
+            <a href="#" class="font-teko text-4xl font-bold text-white uppercase">Flex<span class="brand-gradient">Zone</span></a>
+            <div class="flex justify-center space-x-6 my-6">
+                <a href="#home" class="hover:text-white">Home</a>
+                <a href="#about" class="hover:text-white">About</a>
+                <a href="#classes" class="hover:text-white">Classes</a>
+                <a href="#pricing" class="hover:text-white">Pricing</a>
+            </div>
+             <div class="flex justify-center space-x-6 mb-6 text-xl">
+                <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-white"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-white"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2024 FlexZone Gym. All Rights Reserved. Designed with <i class="fas fa-heart text-red-500"></i> in Coimbatore.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.getElementById('header');
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            const faIcon = menuBtn.querySelector('i');
+            
+            // Sticky Header
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('bg-black', 'shadow-lg');
+                } else {
+                    header.classList.remove('bg-black', 'shadow-lg');
+                }
+            });
+
+            // Mobile Menu Toggle
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('translate-x-full');
+                if (mobileMenu.classList.contains('translate-x-full')) {
+                    faIcon.classList.remove('fa-times');
+                    faIcon.classList.add('fa-bars');
+                } else {
+                    faIcon.classList.remove('fa-bars');
+                    faIcon.classList.add('fa-times');
+                }
+            });
+            
+            // Close mobile menu when a link is clicked
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('translate-x-full');
+                    faIcon.classList.remove('fa-times');
+                    faIcon.classList.add('fa-bars');
+                });
+            });
+
+            // Scroll-triggered animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        const animationType = Math.floor(Math.random() * 3);
+                        switch(animationType) {
+                            case 0:
+                                entry.target.style.transform = 'translateY(0)';
+                                break;
+                            case 1:
+                                entry.target.style.transform = 'translateX(0)';
+                                break;
+                            default:
+                                 entry.target.style.transform = 'scale(1)';
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                // Initialize styles for animation
+                const animationType = Math.floor(Math.random() * 3);
+                 switch(animationType) {
+                    case 0:
+                        el.style.transform = 'translateY(30px)';
+                        break;
+                    case 1:
+                        if(Array.from(el.classList).join(' ').includes('lg:grid-cols-2') && Array.from(el.parentElement.children).indexOf(el) % 2 !== 0){
+                           el.style.transform = 'translateX(50px)';
+                        } else {
+                           el.style.transform = 'translateX(-50px)';
+                        }
+                        break;
+                    default:
+                         el.style.transform = 'scale(0.9)';
+                }
+                observer.observe(el);
+            });
+            
+            // Active Nav Link on Scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
+
